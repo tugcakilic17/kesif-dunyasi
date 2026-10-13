@@ -11,28 +11,30 @@ const overlap = 250 * sourceScale;
 const blendStart = 180 * sourceScale;
 const eastOverlap = 420 * sourceScale;
 const beachTopOverlap = 200 * sourceScale;
+// Resolve public assets under the repository path when hosted on GitHub Pages.
+const assetUrl = (filename: string) => `${import.meta.env?.BASE_URL ?? '/'}${filename}`;
 
 export const worldImages = [
-  { src: '/forest-valley-original.png', x: 0, y: 0, width: imageWidth, height: imageHeight, maskImage: undefined },
+  { src: assetUrl('forest-valley-original.png'), x: 0, y: 0, width: imageWidth, height: imageHeight, maskImage: undefined },
   {
-    src: '/shape-garden-west-v1.png', x: imageWidth - eastOverlap, y: 0,
+    src: assetUrl('shape-garden-west-v1.png'), x: imageWidth - eastOverlap, y: 0,
     width: imageWidth + eastOverlap, height: imageHeight,
-    maskImage: 'url(/shape-garden-west-join-mask-v1.png)',
+    maskImage: `url(${assetUrl('shape-garden-west-join-mask-v1.png')})`,
   },
   {
-    src: '/shape-garden-east-v1.png', x: imageWidth * 2 - eastOverlap, y: 0,
+    src: assetUrl('shape-garden-east-v1.png'), x: imageWidth * 2 - eastOverlap, y: 0,
     width: imageWidth + eastOverlap, height: imageHeight,
-    maskImage: 'url(/shape-garden-east-join-mask-v1.png)',
+    maskImage: `url(${assetUrl('shape-garden-east-join-mask-v1.png')})`,
   },
   {
-    src: '/island-sea-south-v1.png', x: 0, y: imageHeight - overlap,
+    src: assetUrl('island-sea-south-v1.png'), x: 0, y: imageHeight - overlap,
     width: imageWidth, height: imageHeight + overlap,
     maskImage: `linear-gradient(to bottom, transparent ${blendStart}px, black ${overlap}px)`,
   },
   {
-    src: '/island-sea-east-garden-v5.png', x: imageWidth - eastOverlap, y: imageHeight - beachTopOverlap,
+    src: assetUrl('island-sea-east-garden-v5.png'), x: imageWidth - eastOverlap, y: imageHeight - beachTopOverlap,
     width: imageWidth / 2 + eastOverlap, height: imageHeight + beachTopOverlap,
-    maskImage: 'url(/island-sea-east-garden-mask-v5.png)',
+    maskImage: `url(${assetUrl('island-sea-east-garden-mask-v5.png')})`,
   },
 ];
 
