@@ -1,0 +1,35 @@
+{
+  "name": "kesif-dunyasi",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Fareyle sürüklenerek gezilen sade bölge haritası.",
+  "scripts": {
+    "dev": "vite apps/web --host 127.0.0.1",
+    "build": "vue-tsc --noEmit -p apps/web/tsconfig.json && vite build apps/web",
+    "preview": "vite preview apps/web --host 127.0.0.1"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.5.3",
+    "@capacitor/core": "^8.5.3",
+    "@capacitor/ios": "^8.5.3",
+    "dotenv": "^18.0.7",
+    "fastify": "^5.12.5",
+    "pg": "^8.23.1",
+    "phaser": "^4.2.1",
+    "vue": "^3.5.43"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "8.4.3",
+    "@types/node": "^26.6.5",
+    "@types/pg": "^8.23.1",
+    "@vitejs/plugin-vue": "^6.0.10",
+    "tsx": "^4.23.15",
+    "typescript": "~5.9.3",
+    "vite": "^8.3.4",
+    "vue-tsc": "^3.3.13"
+  }
+}
