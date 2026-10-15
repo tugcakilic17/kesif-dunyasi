@@ -24,6 +24,8 @@ Derleme başarılı; çıktıdaki 27 harita dosyası ve kaynak referansları do�
 
 ## Üretim geçmişi
 
+15 Ekim 2026: En uzak (%28) masaüstü görünümünde haritanın sağında ve solunda görünen eski deniz şeritleri düzeltildi. `MapArtwork.vue` aynı onaylı katmanları ve maskeleri yeniden kullanır. Sol dış boşluk kenar yansımasıyla; sağ dış boşluk masal kaynak görselinin zaten var olan deniz devamıyla tamamlanır. Diyar yerleşimi, kamera sınırları, minimum yakınlaştırma ve %100 üst sınırı değişmez. Yeni görsel üretilmedi; 27 oyun varlığının SHA256 değerleri korundu. 1920 ×800 görünümünde %28 ve normal %100 görünümü kontrol edildi. Ekran görüntüsü: `work/game-map-overview-sea-edges.png`.
+
 Ana sayfa `world-home-v8.png` görselini ve statik arayüz bileşenlerini kullanır. Dünya haritası sınırları `world-home.ts`, görünüm `WorldHome.vue` içindedir. Güncel sadeleştirilmiş sahne ve kartların üstünde tamamlanan kıyılar [WORLD_HOME_ROUNDED_PLAYFUL_PROMPT.md](WORLD_HOME_ROUNDED_PLAYFUL_PROMPT.md), ilk arayüz üretimi [WORLD_HOME_REFERENCE_UI_PROMPT.md](WORLD_HOME_REFERENCE_UI_PROMPT.md) dosyasındadır.
 
 Önceki tasarım kayıtları `archive/` altındadır. Bu kayıtlar geçmişteki dosya yollarını ve kaldırılan sürümleri anlatabilir; güncel varlık listesi yukarıdaki tablo ve `game-map.ts` dosyasıdır.

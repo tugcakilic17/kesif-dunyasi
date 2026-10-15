@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
+import MapArtwork from './MapArtwork.vue';
 import { clampWorldX, clampWorldY, imageHeight, imageWidth, oceanTileHeight, oceanTileWidth, worldCenter, worldHeight, worldImages, worldRegions, worldWidth, type RealmId } from './game-map';
 
 const props = defineProps<{ initialRealm: RealmId }>();
@@ -21,6 +22,10 @@ const minimumZoom = computed(() => Math.min(viewportWidth.value / worldWidth, vi
 const maximumZoom = computed(() => fittedZoom.value);
 const zoomPercentage = computed(() => fittedZoom.value > 0 ? Math.round(zoom.value / fittedZoom.value * 100) : 100);
 const skyExtensionHeight = computed(() => Math.max(0, y.value));
+// At overview scale, pad the exposed sides with the approved scene instead of a different ocean texture.
+const leftExtensionWidth = computed(() => Math.max(0, x.value));
+const rightExtensionLeft = computed(() => x.value + worldWidth * zoom.value);
+const rightExtensionWidth = computed(() => Math.max(0, viewportWidth.value - rightExtensionLeft.value));
 const oceanTiles = computed(() => {
   const width = oceanTileWidth * zoom.value;
   const height = oceanTileHeight * zoom.value;
@@ -174,14 +179,18 @@ onBeforeUnmount(() => resizeObserver?.disconnect());
     <div class="ocean-background" aria-hidden="true">
       <img v-for="tile in oceanTiles" :key="tile.key" :src="worldImages[0]!.src" alt="" draggable="false" :style="tile.style" />
     </div>
+    <div v-if="leftExtensionWidth > 0" class="map-side-extension" aria-hidden="true"
+      :style="{ left: 0, width: `${leftExtensionWidth}px` }">
+      <MapArtwork include-ocean :style="{ transform: `translate(${x}px, ${y}px) scale(${-zoom}, ${zoom})` }" />
+    </div>
+    <div v-if="rightExtensionWidth > 0" class="map-side-extension" aria-hidden="true"
+      :style="{ left: `${rightExtensionLeft}px`, width: `${rightExtensionWidth}px` }">
+      <!-- The fairy source already contains sea beyond the navigable world's right edge. -->
+      <MapArtwork include-ocean :style="{ overflow: 'visible', transform: `translate(${-worldWidth * zoom}px, ${y}px) scale(${zoom})` }" />
+    </div>
     <div v-if="skyExtensionHeight > 0" class="sky-extension" aria-hidden="true"
       :style="{ height: `${skyExtensionHeight}px` }" />
-    <div class="geometry-world" :style="{ width: `${worldWidth}px`, height: `${worldHeight}px`, transform: `translate(${x}px, ${y}px) scale(${zoom})` }">
-      <img v-for="image in worldImages.slice(1)" :key="image.src" class="geometry-art" :src="image.src" alt="" draggable="false" decoding="async"
-        :width="image.width" :height="image.height"
-        :style="{ left: `${image.x}px`, top: `${image.y}px`, width: `${image.width}px`, height: `${image.height}px`, maskImage: image.maskImage, WebkitMaskImage: image.maskImage,
-          maskSize: '100% 100%', WebkitMaskSize: '100% 100%', maskRepeat: 'no-repeat', WebkitMaskRepeat: 'no-repeat' }" />
-    </div>
+    <MapArtwork class="geometry-world" :style="{ transform: `translate(${x}px, ${y}px) scale(${zoom})` }" />
     <nav class="map-controls" aria-label="Diyarlar arasında gezinme" @pointerdown.stop @wheel.stop>
       <button type="button" @click="showWholeWorld">Tüm Harita</button>
       <select v-model="selectedRealm" aria-label="Diyara git" @change="travelToRealm">
@@ -199,14 +208,13 @@ onBeforeUnmount(() => resizeObserver?.disconnect());
 .geometry-viewport { background: #6dd5ee; overflow: clip; }
 .ocean-background { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
 .ocean-background img { position: absolute; display: block; max-width: none; }
+.map-side-extension { position: absolute; top: 0; bottom: 0; overflow: hidden; pointer-events: none; }
 .sky-extension { position: absolute; left: 0; right: 0; overflow: hidden; pointer-events: none; }
 .sky-extension {
   top: 0;
   background: linear-gradient(to bottom, #9adbff, #9adbff00),
     linear-gradient(to right, #30b6fa, #29aafa 45%, #1891fb);
 }
-.geometry-world { position: absolute; top: 0; left: 0; transform-origin: 0 0; overflow: hidden; }
-.geometry-art { position: absolute; display: block; max-width: none; pointer-events: none; user-select: none; }
 .home-control {
   position: absolute; z-index: 5; left: 14px; top: 14px;
   min-height: 38px; padding: 0 14px; border: 2px solid #d7deb5; border-radius: 12px;
