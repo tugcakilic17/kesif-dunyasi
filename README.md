@@ -1,19 +1,47 @@
 # Keşif Dünyası
 
-Orman, iki bölümlü Şekiller Bahçesi, kumsal ve adalardan oluşan keşif haritası. Uygulama doğrudan dördüncü tasarımı açar. Harita seçim menüsü ve görsellerin üzerindeki yuvarlak oyun noktaları kaldırılmıştır.
+Orman, Deniz ve Liman, Şekiller Bahçesi, Bilim Diyarı ve Masal Diyarı içeren keşif oyunu. Ana sayfa, verilen Oyun Dünyası referansının çizim ve arayüz düzenini esas alır: üst bar, ahşap başlık, renkli bölge etiketleri ve son keşif/rozet/günlük görev kartları bulunur. Bir diyarın üzerine gelince sınırı parlar; tıklayınca oyun haritasındaki o bölge normal %100 ölçekte açılır.
 
-Fareyle veya dokunarak sürükleyin; fare tekerleğiyle yakınlaşın ve uzaklaşın. Kamera haritanın sınırlarında durur.
+Üst menü ve alt kartlar şimdilik yalnızca görsel UI'dır; tıklanınca pencere veya sayfa açılmaz. Profil, ilerleme ve ödül değerleri tasarım örnekleridir. Diyar seçimi oyun haritasına açılır. Ana sayfa, yataya yayılmış adaları olan tek kesintisiz sahneyle ekranın tamamını kaplar. Üstte gökyüzü ve bulutlu deniz ufku, iki alt köşede büyük yapraklar ve çiçekler bulunur. Yuvarlak ve sade çocuk oyunu çizimi kullanılır. Deniz, seyrek kayık ve bulutlarla canlandırılır; alt adaların kıyıları kartların üstünde tamamlanır. Tekrarlanan deniz zemini kullanılmaz. Güncel yerleşim ve görsel üretim kaydı `docs/WORLD_HOME_ROUNDED_PLAYFUL_PROMPT.md` dosyasındadır.
+
+Oyun içindeki **Dünya Haritası** düğmesi ana sayfaya döner. Diyar bağlantıları `?region=forest`, `?region=shapes`, `?region=sea`, `?region=science`, `?region=magic` biçimindedir. Tarayıcının geri/ileri düğmeleri ve klavyeyle seçim desteklenir. Eski deneme sayfaları kaldırılmıştır.
+
+Haritayı fareyle sürükleyerek veya tekerlekle gezin. **Tüm Harita**, **Diyara git** ve **− / +** kontrolleri kullanılabilir. Yakınlaştırma normal açılış ölçeği olan %100 ile sınırlıdır.
+
+## Dosya düzeni
+
+```text
+apps/
+  web/
+    public/assets/game_map/  # Oyun ve ana sayfa görselleri, geçiş maskeleri
+    src/
+      App.vue               # Uygulama giriş bileşeni
+      GameMap.vue           # Harita görünümü, kamera ve kontroller
+      game-map.ts           # Diyarlar, katmanlar, ölçüler ve dosya yolları
+      WorldHome.vue         # Tıklanabilir dünya haritası ana sayfası
+      world-home.ts         # Ana sayfa görseli ve diyar sınırları
+      HomeIcon.vue          # Renkli arayüz ikonları
+      main.ts
+      style.css
+  server/                   # Sunucu alanı
+docs/
+  GAME_MAP.md               # Güncel harita varlıkları ve katman bilgileri
+  WORLD_HOME_PROMPT.md       # Ana sayfa görselinin üretim kaydı
+  archive/                  # Önceki tasarım ve üretim kayıtları
+```
+
+Görseller `public` altında tutulduğu için geliştirmede ve üretimde doğrudan sunulur. Dosya adresleri Vite `BASE_URL` ile oluşturulur; GitHub Pages alt dizini desteklenir. Görsel yerleşimi, maskeler ve katman sırası haritanın geçişlerini birlikte oluşturur.
 
 ## Çalıştırma
 
-Node.js 22.12 veya üzeri gereklidir.
+Node.js 22.12 veya üzeri gerekir.
 
 ```sh
 npm ci
 npm run dev
 ```
 
-Windows PowerShell komut yürütme ilkesi npm komutunu engelliyorsa npm.cmd kullanın.
+Windows PowerShell komut yürütme ilkesi engelliyorsa `npm.cmd` kullanın.
 
 ## Derleme
 
@@ -22,15 +50,12 @@ npm run build
 npm run preview
 ```
 
-Vue 3 ve TypeScript kaynakları `apps/web/src` içindedir. Derleme çıktısı `apps/web/dist` klasörüne yazılır. Statik barındırma için bu klasör kullanılır.
-
-Ana ekran `apps/web/src/IslandWorldFour.vue`, görsel yerleşimi ve kamera sınırları `apps/web/src/island-world.ts` dosyasındadır. Kullanılan görseller `apps/web/public` altında saklanır. Görsel üretim tarifleri `docs` içindedir.
+Derleme çıktısı `apps/web/dist` klasörüne yazılır. Statik barındırma için bu klasör kullanılır.
 
 ## GitHub Pages
 
-1. Depoda **Settings → Pages** ekranını açın.
-2. **Build and deployment → Source** alanında **GitHub Actions** seçin.
-3. **Actions → Deploy to GitHub Pages → Run workflow** ile `main` dalını yayınlayın.
-4. İşlem başarılı olduğunda siteyi https://tugcakilic17.github.io/kesif-dunyasi/ adresinden açın.
+Depoda **Settings → Pages → Build and deployment → GitHub Actions** seçin. **Actions → Deploy to GitHub Pages → Run workflow** ile `main` dalını yayınlayın. `.github/workflows/deploy-pages.yml`, `main` dalına gönderilen değişiklikleri de otomatik derleyip yayınlar.
 
-`.github/workflows/deploy-pages.yml`, `main` dalına gönderilen her değişikliği derleyip otomatik yayınlar. Görseller ve bağlantı maskeleri Pages alt dizinine uygun yüklenir. Yerel geliştirme adresi kök dizinde kalır; üretim derlemesinin önizleme adresi `http://127.0.0.1:4173/kesif-dunyasi/` olur.
+Yayın adresi: https://tugcakilic17.github.io/kesif-dunyasi/
+
+Yerel geliştirme kök dizinde, üretim önizlemesi `/kesif-dunyasi/` altında çalışır.

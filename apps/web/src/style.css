@@ -22,10 +22,3 @@ body,
   cursor: grabbing;
 }
 
-.map {
-  display: block;
-  max-width: none;
-  pointer-events: none;
-  will-change: transform;
-  transform-origin: 0 0;
-}
