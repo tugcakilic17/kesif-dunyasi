@@ -18,7 +18,14 @@ defineProps<{ name: string }>();
     <g v-else-if="name === 'forest'" stroke-linejoin="round"><path d="M26 42h12v19H26Z" fill="#b16925"/><path d="M32 4 14 25h9L7 43h11L5 54h54L46 43h11L41 25h9Z" fill="#49c537" stroke="#249224" stroke-width="2"/><path d="m32 10-9 17 10-5 9 5Z" fill="#94e853"/></g>
     <g v-else-if="name === 'shapes'"><path d="m31 4 14 23H17Z" fill="#ffce30" stroke="#edac19" stroke-width="2"/><rect x="6" y="33" width="25" height="25" rx="5" fill="#208dfa" stroke="#1167c9" stroke-width="2"/><circle cx="48" cy="45" r="14" fill="#ff477b" stroke="#df1b56" stroke-width="2"/><path d="M10 38h16" stroke="#85d7ff" stroke-width="4"/></g>
     <g v-else-if="name === 'sea'"><path d="M8 46h49L46 59H21Z" fill="#ad641f" stroke="#714016" stroke-width="2"/><path d="M31 5v42" stroke="#8e5724" stroke-width="3"/><path d="m27 10-20 30h20Z" fill="#fffcec" stroke="#b3e2e9" stroke-width="2"/><path d="m36 15 17 25H36Z" fill="#8ae5ee"/><path d="M3 61q8-7 16 0t16 0 16 0 12 0" fill="none" stroke="#159de7" stroke-width="4"/></g>
-    <g v-else-if="name === 'science'" fill="none" stroke="#6653ef" stroke-width="3.5"><ellipse cx="32" cy="32" rx="28" ry="11"/><ellipse cx="32" cy="32" rx="28" ry="11" transform="rotate(60 32 32)"/><ellipse cx="32" cy="32" rx="28" ry="11" transform="rotate(120 32 32)"/><circle cx="32" cy="32" r="6" fill="#2ba7fa" stroke="none"/><circle cx="13" cy="16" r="4" fill="#ff5376" stroke="none"/></g>
+    <g v-else-if="name === 'science'" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M24 8h16v17l15 26q5 9-6 9H15q-11 0-6-9l15-26Z" fill="#e2f4f5" stroke="#6189ab" stroke-width="3"/>
+      <path d="M19 37q12-4 26 0l9 16q2 4-6 4H16q-8 0-6-4Z" fill="#9683d6"/>
+      <path d="M19 38q12-4 26 0" fill="none" stroke="#c5b8ed" stroke-width="3"/>
+      <path d="M21 8h22" stroke="#7aa9c1" stroke-width="6"/>
+      <path d="M28 15v12l-6 11" fill="none" stroke="#fffdf4" stroke-width="3"/>
+      <circle cx="26" cy="46" r="3" fill="#d9d0f4"/><circle cx="39" cy="50" r="2" fill="#d9d0f4"/>
+    </g>
     <g v-else-if="name === 'magic'"><path d="M31 18q-11-8-26-3v38q16-6 27 2 12-8 27-2V15q-16-5-27 3Z" fill="#fff8da" stroke="#b873eb" stroke-width="3"/><path d="M32 19v33M10 25l15 3m-15 4 15 3m14-10 14-3m-14 10 14-3" stroke="#d5b4f4" stroke-width="2"/><path d="m44 3 3 6 7 1-5 5 1 7-6-4-6 4 1-7-5-5 7-1Z" fill="#ffcf2c"/></g>
     <g v-else-if="name === 'trophy'"><path d="M18 5h28v23c0 22-28 22-28 0Z" fill="#ffbf20" stroke="#ed9100" stroke-width="2"/><path d="M18 10H6v11q0 17 16 17m24-28h12v11q0 17-16 17" fill="none" stroke="#f9a315" stroke-width="5"/><path d="M30 42h5v12h13v7H17v-7h13" fill="#de870d"/></g>
     <g v-else-if="name === 'calendar'"><rect x="8" y="10" width="48" height="49" rx="7" fill="#fffaf0" stroke="#ed565b" stroke-width="4"/><path d="M10 23h44" stroke="#ed565b" stroke-width="9"/><path d="M20 4v13m24-13v13" stroke="#903d34" stroke-width="5" stroke-linecap="round"/><path d="M20 34h6m12 0h6m-24 11h6m12 0h6" stroke="#b66f68" stroke-width="5"/></g>

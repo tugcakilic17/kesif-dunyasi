@@ -1,35 +1,27 @@
-# Güncel oyun haritası
+# Harita dosyaları
 
-Tek haritanın varlıkları `apps/web/public/assets/game_map/` klasöründedir. `apps/web/src/game-map.ts` dosyası tüm görsellerin ve maskelerin adreslerini, katman sırasını ve yerleşimini tanımlar. `apps/web/src/GameMap.vue` görünümü ve kamerayı yönetir.
+## Bölge haritası
 
-## Kullanılan görseller
+`game-map.ts`, dünya ölçülerini, diyarları ve `worldImages` katmanlarını tanımlar. `MapArtwork.vue` görselleri maskeleriyle yerleştirir; `GameMap.vue` sürükleme, yakınlaştırma ve kamerayı yönetir.
 
-| Alan | Dosyalar |
+`public/assets/game_map/` altında kullanılan 15 görsel ve 12 dosya maskesi vardır. Aynı bölgede birden fazla görsel bulunması gereklidir: genel kaynaklar arka planı tamamlar, ayrıntı görselleri maskelerle üzerlerine yerleşir. Dosya adındaki sürüm numarası, dosyanın kullanılmadığı anlamına gelmez.
+
+| Alan | Kullanılan görseller |
 | --- | --- |
-| Deniz arka planı | `world-ocean-backdrop-v3.png` |
+| Deniz | `world-ocean-storybook-v1.png` |
 | Orman | `forest-valley-original.png` |
-| Şekiller Bahçesi | `geometry-garden-main-v3.png`, `geometry-garden-east-v2.png` |
-| Liman ve kıyı | `island-sea-south-v1.png`, `island-sea-east-garden-v5.png`, `coast-valley-link-v1.png` |
-| Liman altı deniz | `harbor-sea-south-v1.png` |
-| Bilim | `science-realm-v3.png`, `science-campus-v6.png`, `science-campus-north-v1.png`, `science-campus-south-v1.png` |
-| Masal | `cloud-fairy-realm-v8.png`, `cloud-fairy-north-v1.png`, `cloud-fairy-south-v1.png` |
+| Şekiller | `geometry-garden-main-v3.png`, `geometry-garden-east-v2.png` |
+| Liman | `island-sea-south-storybook-v1.png`, `island-sea-east-garden-storybook-v1.png`, `harbor-beach-south-storybook-v1.png`, `coast-valley-link-storybook-v1.png` |
+| Bilim | `science-realm-storybook-v1.png`, `science-campus-storybook-v1.png`, `science-campus-north-storybook-v1.png`, `science-campus-south-storybook-v1.png` |
+| Masal | `cloud-fairy-realm-storybook-v1.png`, `cloud-fairy-north-storybook-v1.png`, `cloud-fairy-south-storybook-v1.png` |
 
-Toplam 15 görsel ve 12 dosya maskesi vardır. Limanın ormanla geçişinde ayrıca kodda tanımlanan bir gradyan maskesi kullanılır. Bilim ve masalın tam alan görselleri, net ayrıntı panellerinin altında kıyı ve kenar geçişlerini tamamlar; aktif katman oldukları için korunmuştur. Dosyaların sürüm isimleri üretim kayıtlarıyla eşleşmek üzere korunur.
+Katman sırası ve maskeler birlikte çalışır. Kıyı geçişlerinde dosya maskelerine ek olarak kodda tanımlı gradyanlar kullanılır.
 
-## Temizlik
+## Ana sayfa ve arayüz
 
-14 Ekim 2026: Kullanılmayan 62 görsel ve maske silindi; yaklaşık 68 MiB temizlendi. Geçici çalışma alanındaki 200 eski görsel de kaldırıldı. Eski deneme ekranları ve 4/5 harita seçimi kaldırıldı. Kullanılan 27 varlığın SHA256 değerleri taşıma öncesiyle aynı. Dünya ölçüleri, katman sırası, geçişler ve %100 yakınlaştırma sınırı korunur. `/` ve eski `?harita=5` bağlantısı aynı güncel haritayı açar.
+- Ana sayfa arka planı: `public/assets/world_map/background/world-home-v10.png`.
+- Kullanılan arayüz görselleri: `public/assets/world_map/ui/`; görsel sınırları `HomeSurface.vue` içinde tanımlıdır.
+- Font ve lisansı: `public/assets/fonts/`.
+- Oyun simgeleri: `GameMarkers.vue`; orman ve liman konumları ilgili `*-games.ts` dosyalarındadır.
 
-Derleme başarılı; çıktıdaki 27 harita dosyası ve kaynak referansları doğrulandı. Tarayıcıda tüm görsellerin yeni adreslerden yüklendiği ve bütün harita görünümünün korunduğu kontrol edildi.
-
-## Üretim geçmişi
-
-15 Ekim 2026: En uzak (%28) masaüstü görünümünde haritanın sağında ve solunda görünen eski deniz şeritleri düzeltildi. `MapArtwork.vue` aynı onaylı katmanları ve maskeleri yeniden kullanır. Sol dış boşluk kenar yansımasıyla; sağ dış boşluk masal kaynak görselinin zaten var olan deniz devamıyla tamamlanır. Diyar yerleşimi, kamera sınırları, minimum yakınlaştırma ve %100 üst sınırı değişmez. Yeni görsel üretilmedi; 27 oyun varlığının SHA256 değerleri korundu. 1920 ×800 görünümünde %28 ve normal %100 görünümü kontrol edildi. Ekran görüntüsü: `work/game-map-overview-sea-edges.png`.
-
-Ana sayfa `world-home-v8.png` görselini ve statik arayüz bileşenlerini kullanır. Dünya haritası sınırları `world-home.ts`, görünüm `WorldHome.vue` içindedir. Güncel sadeleştirilmiş sahne ve kartların üstünde tamamlanan kıyılar [WORLD_HOME_ROUNDED_PLAYFUL_PROMPT.md](WORLD_HOME_ROUNDED_PLAYFUL_PROMPT.md), ilk arayüz üretimi [WORLD_HOME_REFERENCE_UI_PROMPT.md](WORLD_HOME_REFERENCE_UI_PROMPT.md) dosyasındadır.
-
-Önceki tasarım kayıtları `archive/` altındadır. Bu kayıtlar geçmişteki dosya yollarını ve kaldırılan sürümleri anlatabilir; güncel varlık listesi yukarıdaki tablo ve `game-map.ts` dosyasıdır.
-
-- [Bilim ve masal netlik panelleri](archive/TWO_PANEL_REALM_CLARITY_PROMPTS.md)
-- [Liman altı deniz devamı](archive/HARBOR_SEA_CONTINUATION_PROMPTS.md)
-- [Deniz renk uyumu](archive/SEA_COLOR_HARMONY_PROMPTS.md)
+Varlık adresleri Vite `BASE_URL` ile oluşturulur. Bu sayede GitHub Pages alt dizininde de aynı dosyalar yüklenir.

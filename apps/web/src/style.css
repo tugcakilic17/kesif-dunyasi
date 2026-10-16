@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'Baloo 2';
+  src: url('/assets/fonts/baloo-2-variable.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+}
+
 html,
 body,
 #app {
@@ -20,5 +28,14 @@ body,
 
 .map-viewport.dragging {
   cursor: grabbing;
+}
+
+html.reduce-motion *,
+html.reduce-motion *::before,
+html.reduce-motion *::after {
+  animation-duration: .01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: .01ms !important;
+  scroll-behavior: auto !important;
 }
 

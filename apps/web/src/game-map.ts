@@ -26,7 +26,7 @@ export type RealmId = typeof worldRegions[number]['id'];
 // Approved forest/coast panels retain their exact placement, scale and masks.
 export const worldImages = [
   {
-    src: assetUrl('world-ocean-backdrop-v3.png'), x: 0, y: 0,
+    src: assetUrl('world-ocean-storybook-v1.png'), x: 0, y: 0,
     width: imageWidth * 3.5, height: worldHeight,
     maskImage: undefined,
   },
@@ -45,58 +45,60 @@ export const worldImages = [
     maskImage: `url(${assetUrl('geometry-garden-east-mask-v2.png')})`,
   },
   {
-    src: assetUrl('island-sea-south-v1.png'), x: 0, y: imageHeight - 250 * sourceScale,
+    src: assetUrl('island-sea-south-storybook-v1.png'), x: 0, y: imageHeight - 250 * sourceScale,
     width: imageWidth, height: imageHeight + 250 * sourceScale,
     maskImage: `linear-gradient(to bottom, transparent ${180 * sourceScale}px, black ${250 * sourceScale}px)`,
   },
   {
-    src: assetUrl('island-sea-east-garden-v5.png'), x: imageWidth - overlap, y: imageHeight - topOverlap,
+    src: assetUrl('island-sea-east-garden-storybook-v1.png'), x: imageWidth - overlap, y: imageHeight - topOverlap,
     width: imageWidth / 2 + overlap, height: imageHeight + topOverlap,
     maskImage: `url(${assetUrl('island-sea-east-garden-mask-v5.png')})`,
   },
   {
-    src: assetUrl('science-realm-v3.png'), x: seaWidth - overlap, y: imageHeight - topOverlap,
+    src: assetUrl('science-realm-storybook-v1.png'), x: seaWidth - overlap, y: imageHeight - topOverlap,
     width: imageWidth + overlap, height: imageHeight + topOverlap,
     maskImage: `url(${assetUrl('science-realm-mask-v3.png')})`,
   },
   {
-    src: assetUrl('harbor-sea-south-v1.png'), x: 0, y: 1382 * sourceScale,
+    src: assetUrl('harbor-beach-south-storybook-v1.png'), x: 0, y: 1382 * sourceScale,
     width: 1672 * sourceScale, height: 1065 * sourceScale,
-    maskImage: `url(${assetUrl('harbor-sea-south-mask-v1.png')})`,
+    // Avoid covering the original eastern harbor island with its regenerated copy.
+    maskImage: `radial-gradient(ellipse ${320 * sourceScale}px ${220 * sourceScale}px at ${1440 * sourceScale}px ${300 * sourceScale}px, transparent 70%, black 100%), url(${assetUrl('harbor-sea-south-mask-v1.png')})`,
   },
   {
-    src: assetUrl('science-campus-v6.png'), x: 1252 * sourceScale, y: 741 * sourceScale,
+    src: assetUrl('science-campus-storybook-v1.png'), x: 1252 * sourceScale, y: 741 * sourceScale,
     width: 2928 * sourceScale, height: 1612 * sourceScale,
-    maskImage: `url(${assetUrl('science-campus-mask-v6.png')})`,
+    // Reveal the sharper harbor island beneath this campus source's western sea margin.
+    maskImage: `radial-gradient(ellipse ${280 * sourceScale}px ${210 * sourceScale}px at ${220 * sourceScale}px ${980 * sourceScale}px, transparent 70%, black 100%), url(${assetUrl('science-campus-mask-v6.png')})`,
   },
   // Overlapping detail panels cover the campus; the approved source remains beneath their edge masks.
   {
-    src: assetUrl('science-campus-north-v1.png'), x: 2506 * sourceScale, y: 741 * sourceScale,
+    src: assetUrl('science-campus-north-storybook-v1.png'), x: 2506 * sourceScale, y: 741 * sourceScale,
     width: 1674 * sourceScale, height: 1112 * sourceScale,
     maskImage: `url(${assetUrl('science-campus-north-mask-v1.png')})`,
   },
   {
-    src: assetUrl('science-campus-south-v1.png'), x: 1452 * sourceScale, y: 1431 * sourceScale,
+    src: assetUrl('science-campus-south-storybook-v1.png'), x: 1452 * sourceScale, y: 1431 * sourceScale,
     width: 2728 * sourceScale, height: 922 * sourceScale,
     maskImage: `url(${assetUrl('science-campus-south-mask-v1.png')})`,
   },
   {
-    src: assetUrl('coast-valley-link-v1.png'), x: 1400 * sourceScale, y: 500 * sourceScale,
+    src: assetUrl('coast-valley-link-storybook-v1.png'), x: 1400 * sourceScale, y: 500 * sourceScale,
     width: 1050 * sourceScale, height: 700 * sourceScale,
     maskImage: `url(${assetUrl('coast-valley-link-mask-v1.png')})`,
   },
   {
-    src: assetUrl('cloud-fairy-realm-v8.png'), x: 3580 * sourceScale, y: 0,
+    src: assetUrl('cloud-fairy-realm-storybook-v1.png'), x: 3580 * sourceScale, y: 0,
     width: 2272 * sourceScale, height: 2353 * sourceScale,
     maskImage: `url(${assetUrl('cloud-fairy-realm-mask-v8.png')})`,
   },
   {
-    src: assetUrl('cloud-fairy-north-v1.png'), x: 4180 * sourceScale, y: 0,
+    src: assetUrl('cloud-fairy-north-storybook-v1.png'), x: 4180 * sourceScale, y: 0,
     width: 1338 * sourceScale, height: 1353 * sourceScale,
     maskImage: `url(${assetUrl('cloud-fairy-north-mask-v1.png')})`,
   },
   {
-    src: assetUrl('cloud-fairy-south-v1.png'), x: 3980 * sourceScale, y: 1000 * sourceScale,
+    src: assetUrl('cloud-fairy-south-storybook-v1.png'), x: 3980 * sourceScale, y: 1000 * sourceScale,
     width: 1538 * sourceScale, height: 1353 * sourceScale,
     maskImage: `url(${assetUrl('cloud-fairy-south-mask-v1.png')})`,
   },

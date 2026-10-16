@@ -25,6 +25,7 @@ const oceanTiles = Array.from({ length: Math.ceil(worldHeight / oceanTileHeight)
       :width="image.width" :height="image.height"
       :style="{ left: `${image.x}px`, top: `${image.y}px`, width: `${image.width}px`, height: `${image.height}px`,
         maskImage: image.maskImage, WebkitMaskImage: image.maskImage,
+        maskComposite: 'intersect', WebkitMaskComposite: 'source-in',
         maskSize: '100% 100%', WebkitMaskSize: '100% 100%', maskRepeat: 'no-repeat', WebkitMaskRepeat: 'no-repeat' }" />
   </div>
 </template>
